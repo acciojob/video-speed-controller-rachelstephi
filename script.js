@@ -1,54 +1,66 @@
-const video = document.querySelector("video");
-const toggle = document.querySelector(".player__button");
-const progressFilled = document.querySelector(".progress__filled");
+const video = document.querySelector(".player__video");
+const toggle = document.querySelector(".toggle");
 const progress = document.querySelector(".progress");
-const inputs = document.querySelectorAll(".controls input");
-const skipButtons = document.querySelectorAll("[data-skip]");
+const progressFilled = document.querySelector(".progress__filled");
+const volume = document.querySelector(".volume");
+const playbackSpeed = document.querySelector(".playbackSpeed");
+const rewind = document.querySelector(".rewind");
+const forward = document.querySelector(".forward");
 
 function togglePlay() {
-    if (video.paused) {
-        video.play();
-    } else {
-        video.pause();
-    }
+  if (video.paused) {
+    video.play();
+  } else {
+    video.pause();
+  }
 }
 
 function updateButton() {
-    toggle.textContent = video.paused ? "►" : "❚ ❚";
+  toggle.textContent = video.paused ? "►" : "❚ ❚";
 }
 
-function updateProgress() {
-    const percent = (video.currentTime / video.duration) * 100;
-    progressFilled.style.width = percent + "%";
+function handleProgress() {
+  const percent = (video.currentTime / video.duration) * 100;
+  progressFilled.style.width = percent + "%";
 }
 
 function scrub(e) {
-    video.currentTime = (e.offsetX / progress.offsetWidth) * video.duration;
+  const scrubTime = (e.offsetX / progress.offsetWidth) * video.duration;
+  video.currentTime = scrubTime;
 }
 
-function handleUpdate() {
-    if (this.classList.contains("volume")) {
-        video.volume = this.value;
-    }
-
-    if (this.classList.contains("playbackSpeed")) {
-        video.playbackRate = this.value;
-    }
+function changeVolume() {
+  video.volume = this.value;
 }
 
-function skip() {
-    video.currentTime += parseFloat(this.dataset.skip);
+function changeSpeed() {
+  video.playbackRate = this.value;
+}
+
+function rewindVideo() {
+  video.currentTime -= 10;
+}
+
+function forwardVideo() {
+  video.currentTime += 25;
 }
 
 toggle.addEventListener("click", togglePlay);
+
 video.addEventListener("click", togglePlay);
+
 video.addEventListener("play", updateButton);
+
 video.addEventListener("pause", updateButton);
-video.addEventListener("timeupdate", updateProgress);
+
+video.addEventListener("timeupdate", handleProgress);
 
 progress.addEventListener("click", scrub);
 
-inputs.forEach(input => input.addEventListener("change", handleUpdate));
-inputs.forEach(input => input.addEventListener("mousemove", handleUpdate));
+volume.addEventListener("input", changeVolume);
 
-skipButtons.forEach(button => button.addEventListener("click", skip));
+playbackSpeed.addEventListener("input", changeSpeed);
+
+rewind.addEventListener("click", rewindVideo);
+
+forward.addEventListener("click", forwardVideo);
