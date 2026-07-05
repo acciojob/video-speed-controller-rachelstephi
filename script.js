@@ -20,7 +20,9 @@ function updateButton() {
 }
 
 function handleProgress() {
-  const percent = (video.currentTime / video.duration) * 100;
+  const percent = video.duration
+    ? (video.currentTime / video.duration) * 100
+    : 0;
   progressFilled.style.width = percent + "%";
 }
 
@@ -37,30 +39,18 @@ function changeSpeed() {
   video.playbackRate = this.value;
 }
 
-function rewindVideo() {
-  video.currentTime -= 10;
+function skipVideo() {
+  video.currentTime += parseFloat(this.dataset.skip);
 }
 
-function forwardVideo() {
-  video.currentTime += 25;
-}
-
+// Event listeners
 toggle.addEventListener("click", togglePlay);
-
 video.addEventListener("click", togglePlay);
-
 video.addEventListener("play", updateButton);
-
 video.addEventListener("pause", updateButton);
-
 video.addEventListener("timeupdate", handleProgress);
-
 progress.addEventListener("click", scrub);
-
 volume.addEventListener("input", changeVolume);
-
 playbackSpeed.addEventListener("input", changeSpeed);
-
-rewind.addEventListener("click", rewindVideo);
-
-forward.addEventListener("click", forwardVideo);
+rewind.addEventListener("click", skipVideo);
+forward.addEventListener("click", skipVideo);

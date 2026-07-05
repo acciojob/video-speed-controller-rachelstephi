@@ -1,48 +1,48 @@
-body{
-    background:#222;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
-    margin:0;
-    font-family:Arial;
+body {
+  background: #222;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: Arial, sans-serif;
 }
 
-.player{
-    width:800px;
-    background:#000;
+.player {
+  width: 800px;
+  background: #000;
 }
 
-.viewer{
-    width:100%;
+.player__video {
+  width: 100%;
+  display: block;
 }
 
-.progress{
-    height:8px;
-    background:#555;
-    cursor:pointer;
+.progress {
+  height: 8px;
+  background: #555;
+  cursor: pointer;
 }
 
-.progress__filled{
-    width:0%;
-    height:100%;
-    background:red;
+.progress__filled {
+  width: 0%;
+  height: 100%;
+  background: red;
 }
 
-
-.controls{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    padding:10px;
-    background:#333;
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  background: #333;
 }
 
-button{
-    padding:8px 12px;
-    cursor:pointer;
+button {
+  padding: 8px 12px;
+  cursor: pointer;
 }
 
-input[type="range"]{
-    width:120px;
+input[type="range"] {
+  width: 120px;
 }
